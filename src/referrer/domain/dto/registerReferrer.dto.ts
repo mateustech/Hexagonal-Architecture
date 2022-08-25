@@ -1,4 +1,4 @@
-import { IsDate, IsEmail, IsString } from 'class-validator';
+import { IsEmail, IsString } from 'class-validator';
 
 export class ReferrerDto {
   @IsString()
@@ -7,8 +7,8 @@ export class ReferrerDto {
   @IsEmail()
   email: string;
 
-  @IsDate()
-  birthday: Date;
+  @IsString()
+  birthday: string;
 
   @IsString()
   crm: string;

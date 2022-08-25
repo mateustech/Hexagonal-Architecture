@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import IReferrerRepository from '../port/out/referrerRepository';
 import Referrer from '../referrer';
 
@@ -12,7 +12,7 @@ export default class RegisterReferrerUseCase {
   execute(referrer: Referrer): Referrer {
     const emailAlreadyUsed = this.checkEmailAlreadyUsed(referrer.email);
     if (emailAlreadyUsed) {
-      throw new Error('E-mail already used');
+      throw new BadRequestException('E-mail already used');
     }
 
     const referrerSaved = this.referrerRepository.save(referrer);

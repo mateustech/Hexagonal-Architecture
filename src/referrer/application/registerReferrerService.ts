@@ -10,7 +10,7 @@ export default class RegisterReferrerService {
   execute(payload: ReferrerDto): Referrer {
     const { name, email, birthday, crm } = payload;
 
-    const referrer = new Referrer(name, email, birthday, crm);
+    const referrer = new Referrer(name, email, new Date(birthday), crm);
 
     return this.registerReferrerUseCase.execute(referrer);
   }
