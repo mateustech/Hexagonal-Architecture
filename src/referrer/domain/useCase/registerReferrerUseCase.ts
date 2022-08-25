@@ -6,17 +6,23 @@ import Referrer from '../referrer';
 export default class RegisterReferrerUseCase {
   constructor(
     @Inject('IReferrerRepository')
-    readonly referrerRepository: IReferrerRepository,
+    private readonly referrerRepository: IReferrerRepository,
   ) {}
 
-  execute(referrer: Referrer): string {
+  execute(referrer: Referrer): Referrer {
     const emailAlreadyUsed = this.checkEmailAlreadyUsed(referrer.email);
     if (emailAlreadyUsed) {
       throw new Error('E-mail already used');
     }
 
-    const id = this.referrerRepository.save(referrer);
-    return id;
+    const referrerSaved = this.referrerRepository.save(referrer);
+
+    return new Referrer(
+      referrerSaved.name,
+      referrerSaved.email,
+      referrerSaved.birthday,
+      referrerSaved.crm,
+    );
   }
 
   private checkEmailAlreadyUsed(email: string): boolean {

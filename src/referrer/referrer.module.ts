@@ -12,7 +12,7 @@ import ReferrerController from './infra/referrer.controller';
     RegisterReferrerUseCase,
     {
       provide: 'IReferrerRepository',
-      useValue: ReferrerRepositoryDB,
+      useClass: ReferrerRepositoryDB,
     },
   ],
 })

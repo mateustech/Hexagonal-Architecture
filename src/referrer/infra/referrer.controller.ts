@@ -9,6 +9,7 @@ export default class ReferrerController {
   @Post()
   registerReferrerHandler(@Body() body: ReferrerDto) {
     const { name, email, birthday, crm } = body;
+
     const result = this.registerReferrerService.execute({
       name,
       email,

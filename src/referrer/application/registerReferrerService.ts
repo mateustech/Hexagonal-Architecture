@@ -7,7 +7,7 @@ import RegisterReferrerUseCase from '../domain/useCase/registerReferrerUseCase';
 export default class RegisterReferrerService {
   constructor(readonly registerReferrerUseCase: RegisterReferrerUseCase) {}
 
-  execute(payload: ReferrerDto): string {
+  execute(payload: ReferrerDto): Referrer {
     const { name, email, birthday, crm } = payload;
 
     const referrer = new Referrer(name, email, birthday, crm);
