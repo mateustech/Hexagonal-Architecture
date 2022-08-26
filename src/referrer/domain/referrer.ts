@@ -1,4 +1,6 @@
-// Entidade de dominio
+/**
+ * Regra de negócio
+ */
 export default class Referrer {
   constructor(
     readonly name: string,
