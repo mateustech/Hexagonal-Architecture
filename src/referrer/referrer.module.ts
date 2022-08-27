@@ -1,9 +1,9 @@
 import { Inject, Injectable, Module } from '@nestjs/common';
-import GetReferrerController from './application/http/getReferrer.controller';
-import GetReferrerService from './application/service/getReferrer.service';
-import GetReferrerAdapterInput from './domain/adapters/getReferrer.adapter';
-import GetReferrerAdapterOutput from './infra/adapters/getReferrer.usecase';
-import GetReferrerUnimedOutput from './infra/adapters/getReferrerUnimed.usecase';
+import ReferrerController from './application/http/referrer.controller';
+import ReferrerService from './application/service/referrer.service';
+import ReferrerAdapterInput from './domain/adapters/referrer.adapter';
+import ReferrerOncoAdapter from './infra/adapters/referrerOnco.adapter';
+import ReferrerUnimedAdapter from './infra/adapters/referrerUnimed.adapter';
 import ReferrerRepositoryDB from './infra/repository/referrerRepository';
 
 type OriginApplication = 'onco' | 'unimed';
@@ -11,26 +11,23 @@ type OriginApplication = 'onco' | 'unimed';
 class DelegationAdapterOutput {
   constructor(@Inject('TYPE') private type: OriginApplication) {}
   getInstance() {
-    return this.type === 'onco'
-      ? GetReferrerAdapterOutput
-      : GetReferrerUnimedOutput;
+    return this.type === 'onco' ? ReferrerOncoAdapter : ReferrerUnimedAdapter;
   }
 }
 @Module({
   imports: [],
-  controllers: [GetReferrerController],
+  controllers: [ReferrerController],
   providers: [
-    GetReferrerService,
+    ReferrerService,
     {
-      provide: 'IGetReferrerInput',
-      useClass: GetReferrerAdapterInput,
+      provide: 'ReferrerInput',
+      useClass: ReferrerAdapterInput,
     },
     {
-      provide: 'IGetReferrerOutput',
+      provide: 'ReferrerOutput',
       useClass: new DelegationAdapterOutput('unimed').getInstance(),
     },
     ReferrerRepositoryDB,
   ],
-  exports: [],
 })
 export class ReferrerModule {}

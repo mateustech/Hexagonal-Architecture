@@ -10,19 +10,18 @@ export default class ReferrerRepositoryDB {
   save(referrer: Referrer): ReferrerModel {
     const { name, email, birthday, crm } = referrer;
     const id = generateId();
-    const referrerModel = new ReferrerModel(id, name, email, birthday, crm);
+    const referrerModel = new ReferrerModel(name, email, birthday, crm, id);
     this.referrers.push(referrerModel);
     return referrerModel;
   }
 
-  findAll(): ReferrerModel {
-    const id = '1';
+  findAll(): ReferrerModel[] {
+    const id = generateId();
     const name = 'John';
     const email = 'johndoe@email.com';
     const birthday = new Date();
     const crm = '12345';
-
-    const referrer = new ReferrerModel(id, name, email, birthday, crm);
-    return referrer;
+    const referrer = new ReferrerModel(name, email, birthday, crm, id);
+    return [referrer];
   }
 }

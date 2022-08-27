@@ -1,19 +1,16 @@
+import { generateId } from 'src/@shared/domain/entity';
+
 /**
  * Regra de negócio
  */
 export default class Referrer {
+  private id: string;
   constructor(
     readonly name: string,
     readonly email: string,
     readonly birthday: Date,
     readonly crm: string,
-  ) {}
-
-  public isYourBitrhdayMonth(date: Date): boolean {
-    return date.getMonth() === this.birthday.getMonth();
-  }
-
-  public crmIsValid(): boolean {
-    return !!this.crm;
+  ) {
+    this.id = generateId();
   }
 }
