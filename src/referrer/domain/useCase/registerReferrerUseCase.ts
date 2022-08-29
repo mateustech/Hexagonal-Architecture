@@ -1,12 +1,12 @@
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
-import IReferrerRepository from '../port/out/referrerRepository';
+import IReferrerOut from '../port/out/referrerRepository';
 import Referrer from '../referrer';
 
 @Injectable()
 export default class RegisterReferrerUseCase {
   constructor(
-    @Inject('IReferrerRepository')
-    private readonly referrerRepository: IReferrerRepository,
+    @Inject('IReferrerOut')
+    private readonly referrerRepository: IReferrerOut,
   ) {}
 
   execute(referrer: Referrer): Referrer {

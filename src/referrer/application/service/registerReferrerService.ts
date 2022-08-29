@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { ReferrerDto } from '../domain/dto/registerReferrer.dto';
-import Referrer from '../domain/referrer';
-import RegisterReferrerUseCase from '../domain/useCase/registerReferrerUseCase';
+import Referrer from 'src/referrer/domain/referrer';
+import RegisterReferrerUseCase from 'src/referrer/domain/useCase/registerReferrerUseCase';
+import { ReferrerDto } from './../../domain/dto/registerReferrer.dto';
 
 @Injectable()
 export default class RegisterReferrerService {

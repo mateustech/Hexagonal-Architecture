@@ -1,7 +1,7 @@
-import ReferrerModel from 'src/referrer/adapter/repository/referrerModel';
 import Referrer from '../../referrer';
 
-export default interface IReferrerRepository {
+// Contrato do adaptador de saida/persistencia com o mundo externo
+export default interface IReferrerOut {
   countByEmail(email: string): number;
-  save(referrer: Referrer): ReferrerModel;
+  save(referrer: Referrer): Referrer;
 }

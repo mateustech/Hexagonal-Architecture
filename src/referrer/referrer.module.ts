@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
-import ReferrerRepositoryDB from './adapter/repository/referrerRepository';
-import RegisterReferrerService from './application/registerReferrerService';
+import { DelegateReferrerAdapterOut } from './adapter/delegateAdapterOut';
+
+import ReferrerController from './application/http/referrer.controller';
+import RegisterReferrerService from './application/service/registerReferrerService';
 import RegisterReferrerUseCase from './domain/useCase/registerReferrerUseCase';
-import ReferrerController from './infra/referrer.controller';
 
 @Module({
   imports: [],
@@ -11,8 +12,11 @@ import ReferrerController from './infra/referrer.controller';
     RegisterReferrerService,
     RegisterReferrerUseCase,
     {
-      provide: 'IReferrerRepository',
-      useClass: ReferrerRepositoryDB,
+      provide: 'IReferrerOut',
+      // Usar o useFactory para computar a flagAdapter
+      useClass: new DelegateReferrerAdapterOut(
+        'onco',
+      ).getServiceImplementation(),
     },
   ],
 })

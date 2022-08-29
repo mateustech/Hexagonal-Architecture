@@ -1,6 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import RegisterReferrerService from '../application/registerReferrerService';
-import { ReferrerDto } from '../domain/dto/registerReferrer.dto';
+import { ReferrerDto } from '../../domain/dto/registerReferrer.dto';
+import RegisterReferrerService from '../service/registerReferrerService';
 
 @Controller('referrer')
 export default class ReferrerController {
