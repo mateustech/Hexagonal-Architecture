@@ -29,3 +29,10 @@
   </tr>
 
 </table>
+
+## Padrões de projeto e princípios
+
+- UseCase
+- Delegate
+- Port and Adapters
+- IoC and DI
